@@ -1,74 +1,98 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+<title>Broadband Map Quality Assessment Matches</title>
+<meta charset=utf-8 />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
+<link rel="shortcut icon" href="img/fcc_favicon.ico" type="image/x-icon">
 
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Bbmap quality : " />
+<link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Bbmap quality</title>
-  </head>
-
-  <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/psalaz/bbmap_quality">View on GitHub</a>
-
-          <h1 id="project_title">Bbmap quality</h1>
-          <h2 id="project_tagline"></h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/psalaz/bbmap_quality/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/psalaz/bbmap_quality/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
+<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/libs/excanvas.min.js"></script><![endif]-->
+</head>
+<body>
+<div id="header">
+    <div id="logo"><a href="http://www.fcc.gov"><img src="img/fcc-logo.png" alt="FCC Web site"></a></div>
+    <h1>Broadband Map Quality Assessment Matches</h1>
+    <form class="location-search">
+        <input type="text" class="search">
+    </form>
+</div>
+<div id="about">
+    <div id="tooltips">
+        <div id="about-heading">
+            <h2 id="title">About</h2>
+            
+             </div>
+        <div id="about-body">
+            <div id="introText">
+                <p>This application displays June 2012 National Broadband Map data matches to Baker Quality assessment data</p>
+                <br>
+                <p><strong>Details:</strong></p>
+                <ol class="styled">
+                    <li>Make selections on left side of screen</li>
+                    <li>Matches by both "Provider" and "Download Speed" for each provider.</li>
+                    <li>WIRELINE PROVIDERS:  Comcast, AT&T, Frontier, Verizon</li>
+                    <li>WIRELESS PROVIDERS: Verizon, AT&T, Sprint, T-Mobile</li>
+                </ol>
+                <br>
+                <p class="datasource"><strong>Data Source:</strong><br>
+                    National Broadband Map (NBM); Data as of June 2012</p>
+            </div>
+            
+            <div id="map-legend" class="wax-legends map-legends">
+                <div class="wax-legend map-legend" style="display: block;">
+                   
+                    <h4>Comcast Provider Matches (Wireline)</h4>
+                    <ul>
+                            <li><span style="background-color:#FF0000;">&nbsp;</span> <span class="lbl-key">0</span></li>
+                            <li><span style="background-color:#ADD8E6;">&nbsp;</span>  <span class="lbl-key">1</span></li>
+                            <li><span style="background-color:#4E78A0;">&nbsp;</span>  <span class="lbl-key">2</span></li>
+                            <li><span style="background-color:#0000A0;">&nbsp;</span>  <span class="lbl-key">&gt;=3</span></li>
+                        </ul>
+                    <div class="data-source">
+                        <p class="fccsmall">Source: National Broadband Map (Data as of June 2012)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
+<div id="map"></div>
+<div id="controls"> </div>
+<ul class="macro">
+    <li class='comcast_prov_wline'><a id='comcast_prov_wline' class='active' href='#'>Comcast Provider Match (Wireline)</a></li>
+    <li class='comcast_spd_wline'><a id='comcast_spd_wline'  href='#'>Comcast Speed Match (Wireline)</a></li>
+    <li class='att_prov_wline'><a id='att_prov_wline' href='#'>AT&T Provider Match (Wireline)</a></li>
+    <li class='att_spd_wline'><a id='att_spd_wline'  href='#'>AT&T Speed Match (Wireline)</a></li>
+    <li class='platinum_prov_wline'><a id='platinum_prov_wline' href='#'>Platinum Provider Match (Wireline)</a></li>
+    <li class='platinum_spd_wline'><a id='platinum_spd_wline'  href='#'>Platinum Speed Match (Wireline)</a></li>
+    <li class='verizon_prov_wline'><a id='verizon_prov_wline' href='#'>Verizon Provider Match (Wireline)</a></li>
+    <li class='verizon_spd_wline'><a id='verizon_spd_wline'  href='#'>Verizon Speed Match (Wireline)</a></li>
+    <li class='verizon_prov_wless'><a id='verizon_prov_wless' href='#'>Verizon Provider Match (Wireless)</a></li>
+    <li class='verizon_spd_wless'><a id='verizon_spd_wless'  href='#'>Verizon Speed Match (Wireless)</a></li>
+    <li class='att_prov_wless'><a id='att_prov_wless' href='#'>AT&T Provider Match (Wireless)</a></li>
+    <li class='att_spd_wless'><a id='att_spd_wless'  href='#'>AT&T Speed Match (Wireless)</a></li>
+    <li class='sprint_prov_wless'><a id='sprint_prov_wless' href='#'>Sprint Provider Match (Wireless)</a></li>
+    <li class='sprint_spd_wless'><a id='sprint_spd_wless'  href='#'>Sprint Speed Match (Wireless)</a></li>
+    <li class='tmobile_prov_wless'><a id='tmobile_prov_wless' href='#'>T-Mobile Provider Match (Wireless)</a></li>
+    <li class='tmobile_spd_wless'><a id='tmobile_spd_wless'  href='#'>T-Mobile Speed Match (Wireless)</a></li>
+</ul>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>Welcome to GitHub Pages.</h3>
+<!-- Libraries --> 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> 
+<script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script> 
+<script language="javascript" type="text/javascript" src="js/libs/jquery.flot.min.js"></script> 
+<script language="javascript" type="text/javascript" src="js/libs/jquery.flot.pie.min.js"></script> 
+<script src='js/libs/ender.min.js'></script> 
+<script src='js/libs/modestmaps.min.js'></script> 
+<script src='js/libs/easey.min.js'></script> 
+<script src='js/libs/wax.mm.min.js'></script> 
+<script src='js/libs/mustache.js'></script> 
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Bbmap quality maintained by <a href="https://github.com/psalaz">psalaz</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
-  </body>
+<!-- Application code --> 
+<script src='js/app.js'></script>
+</body>
 </html>
